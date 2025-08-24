@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StringProcessor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Consecutive Character Conversion Processor</a> &gt; <a href="index.source.html" class="el_package">org.strtools</a> &gt; <span class="el_source">StringProcessor.java</span></div><h1>StringProcessor.java</h1><pre class="source lang-java linenums">package org.strtools;
+
+import org.strtools.api.StringProcessingStrategy;
+import org.strtools.api.ConsecutiveCharRemoverStrategy;
+import org.strtools.api.ConsecutiveCharReplacerStrategy;
+
+
+import java.util.Objects;
+
+/**
+ * A factory and utility class for processing strings with consecutive characters using
+ * different strategies. This class provides a simple interface for accessing the
+ * available processing strategies and applying them to input strings.
+ *
+ * @since 1.0.0
+ */
+public final class StringProcessor {
+
+    /**
+     * Singleton instance of the remove consecutive strategy.
+     */
+<span class="nc" id="L22">    private static final StringProcessingStrategy REMOVE_STRATEGY = new ConsecutiveCharRemoverStrategy();</span>
+
+    /**
+     * Singleton instance of the replace consecutive strategy.
+     */
+<span class="nc" id="L27">    private static final StringProcessingStrategy REPLACE_STRATEGY = new ConsecutiveCharReplacerStrategy();</span>
+
+    /**
+     * Private constructor to prevent instantiation of this utility class.
+     */
+<span class="nc" id="L32">    private StringProcessor() {</span>
+<span class="nc" id="L33">        throw new AssertionError(&quot;Utility class should not be instantiated&quot;);</span>
+    }
+
+    /**
+     * Processes a string using the remove consecutive strategy.
+     *
+     * @param input the string to process
+     * @return the processed string
+     * @see ConsecutiveCharRemoverStrategy
+     */
+    public static String processWithRemoveStrategy(String input) {
+<span class="nc" id="L44">        return process(input, REMOVE_STRATEGY);</span>
+    }
+
+    /**
+     * Processes a string using the replace consecutive strategy.
+     *
+     * @param input the string to process
+     * @return the processed string
+     * @see ConsecutiveCharReplacerStrategy
+     */
+    public static String processWithReplaceStrategy(String input) {
+<span class="nc" id="L55">        return process(input, REPLACE_STRATEGY);</span>
+    }
+
+    /**
+     * Processes a string using the specified strategy.
+     *
+     * @param input    the string to process
+     * @param strategy the processing strategy to use
+     * @return the processed string
+     * @throws NullPointerException if the strategy is null
+     */
+    public static String process(String input, StringProcessingStrategy strategy) {
+<span class="nc" id="L67">        Objects.requireNonNull(strategy, &quot;Processing strategy must not be null&quot;);</span>
+<span class="nc" id="L68">        return strategy.process(input);</span>
+    }
+
+    /**
+     * Returns the remove consecutive strategy instance.
+     *
+     * @return the remove strategy
+     */
+    public static StringProcessingStrategy getRemoveStrategy() {
+<span class="nc" id="L77">        return REMOVE_STRATEGY;</span>
+    }
+
+    /**
+     * Returns the replace consecutive strategy instance.
+     *
+     * @return the replace strategy
+     */
+    public static StringProcessingStrategy getReplaceStrategy() {
+<span class="nc" id="L86">        return REPLACE_STRATEGY;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

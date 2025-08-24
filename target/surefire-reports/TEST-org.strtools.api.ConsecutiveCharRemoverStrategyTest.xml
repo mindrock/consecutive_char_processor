@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.165" tests="28" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\mindrock\IdeaProjects\consecutive_char_processor\target\test-classes;C:\Users\mindrock\IdeaProjects\consecutive_char_processor\target\classes;C:\Users\mindrock\.m2\repository\org\projectlombok\lombok\1.18.20\lombok-1.18.20.jar;C:\Users\mindrock\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\mindrock\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\mindrock\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\mindrock\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\mindrock\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\mindrock\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;C:\Users\mindrock\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;"/>
+    <property name="java.vm.vendor" value="Amazon.com Inc."/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://aws.amazon.com/corretto/"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Users\mindrock\.jdks\corretto-17.0.15\bin"/>
+    <property name="sun.java.command" value="D:\self_user\self_user_temp\surefire3198132271545000099\surefirebooter-20250824211221010_3.jar D:\self_user\self_user_temp\surefire3198132271545000099 2025-08-24T21-12-20_904-jvmRun1 surefire-20250824211221010_1tmp surefire_0-20250824211221010_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\mindrock\IdeaProjects\consecutive_char_processor\target\test-classes;C:\Users\mindrock\IdeaProjects\consecutive_char_processor\target\classes;C:\Users\mindrock\.m2\repository\org\projectlombok\lombok\1.18.20\lombok-1.18.20.jar;C:\Users\mindrock\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\mindrock\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\mindrock\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\mindrock\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\mindrock\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\mindrock\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;C:\Users\mindrock\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\mindrock"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="C:\Users\mindrock\.jdks\corretto-17.0.15"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\mindrock\IdeaProjects\consecutive_char_processor"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="D:\self_user\self_user_temp\surefire3198132271545000099\surefirebooter-20250824211221010_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.15+6-LTS"/>
+    <property name="user.name" value="mindrock"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Corretto-17.0.15.6.1"/>
+    <property name="localRepository" value="C:\Users\mindrock\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/corretto/corretto-17/issues/"/>
+    <property name="java.io.tmpdir" value="D:\SELF_U~1\SELF_U~1\"/>
+    <property name="idea.version" value="2024.2.3"/>
+    <property name="java.version" value="17.0.15"/>
+    <property name="user.dir" value="C:\Users\mindrock\IdeaProjects\consecutive_char_processor"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\mindrock\.jdks\corretto-17.0.15\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\Programs\05_codeTools\RPA_ShadowBot;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\91_win_resp\self_path;D:\Programs\05_codeTools\TortoiseGit\bin;E:\91_lib\03_java\jdk-20\bin;D:\Programs\dotnet\;D:\Programs\05_codeTools\Git\cmd;D:\Programs\05_codeTools\RPA_ShadowBot;E:\91_lib\01_python\Python314\Scripts\;E:\91_lib\01_python\Python314\;C:\Users\mindrock\AppData\Local\Programs\Python\Launcher\;C:\Users\mindrock\AppData\Local\Microsoft\WindowsApps;D:\Programs\05_codeTools\vscode\bin;C:\Users\mindrock\AppData\Local\Programs\EmEditor;D:\Programs\05_codeTools\Kiro_help\bin;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Amazon.com Inc."/>
+    <property name="java.vm.version" value="17.0.15+6-LTS"/>
+    <property name="java.specification.maintenance.version" value="1"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="testPerformanceWithLongString" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.049"/>
+  <testcase name="testRemovalCreatesNewSequence" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testStrategyName" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.001"/>
+  <testcase name="testProblemExample" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testBlankInputThrowsException(String)[1]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.018"/>
+  <testcase name="testBasicRemoval(String, String)[1]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.001"/>
+  <testcase name="testBasicRemoval(String, String)[2]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.001"/>
+  <testcase name="testBasicRemoval(String, String)[3]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testBasicRemoval(String, String)[4]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testBasicRemoval(String, String)[5]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testBasicRemoval(String, String)[6]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testBasicRemoval(String, String)[7]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.001"/>
+  <testcase name="testBasicRemoval(String, String)[8]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testBasicRemoval(String, String)[9]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testBasicRemoval(String, String)[10]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testBasicRemoval(String, String)[11]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testBasicRemoval(String, String)[12]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testBasicRemoval(String, String)[13]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testBasicRemoval(String, String)[14]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.001"/>
+  <testcase name="testBasicRemoval(String, String)[15]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testBasicRemoval(String, String)[16]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testEmptyAndBlankInputs(String)[1]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testInvalidCharacters(String)[1]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.002"/>
+  <testcase name="testInvalidCharacters(String)[2]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.001"/>
+  <testcase name="testInvalidCharacters(String)[3]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.001"/>
+  <testcase name="testInvalidCharacters(String)[4]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.001"/>
+  <testcase name="testInvalidCharacters(String)[5]" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+  <testcase name="testNullInput" classname="org.strtools.api.ConsecutiveCharRemoverStrategyTest" time="0.0"/>
+</testsuite>

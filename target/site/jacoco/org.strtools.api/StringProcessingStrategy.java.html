@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StringProcessingStrategy.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Consecutive Character Conversion Processor</a> &gt; <a href="index.source.html" class="el_package">org.strtools.api</a> &gt; <span class="el_source">StringProcessingStrategy.java</span></div><h1>StringProcessingStrategy.java</h1><pre class="source lang-java linenums">package org.strtools.api;
+
+/**
+ * A functional interface representing a strategy for processing strings containing
+ * consecutive characters. Implementations define specific behaviors for handling
+ * sequences of identical characters.
+ *
+ * &lt;p&gt;This is a sealed interface that can only be implemented by specified classes
+ * to ensure consistent behavior across all processing strategies.
+ *
+ * @since 1.0.0
+ */
+public sealed interface StringProcessingStrategy permits
+        ConsecutiveCharRemoverStrategy,
+        ConsecutiveCharReplacerStrategy {
+
+    /**
+     * Processes the input string according to the specific strategy implementation.
+     *
+     * @param input the string to process, may be null or empty
+     * @return the processed string, will never be null
+     */
+    String process(String input);
+
+    /**
+     * Returns the name of this processing strategy.
+     *
+     * @return the strategy name
+     */
+    default String getName() {
+<span class="nc" id="L31">        return this.getClass().getSimpleName();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

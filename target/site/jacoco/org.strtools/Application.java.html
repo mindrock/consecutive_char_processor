@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Application.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Consecutive Character Conversion Processor</a> &gt; <a href="index.source.html" class="el_package">org.strtools</a> &gt; <span class="el_source">Application.java</span></div><h1>Application.java</h1><pre class="source lang-java linenums">package org.strtools;
+
+import org.strtools.api.ConsecutiveCharRemoverStrategy;
+import org.strtools.api.StringProcessingStrategy;
+
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ * A command-line interface for demonstrating the string processing functionality.
+ *
+ * &lt;p&gt;This class provides an interactive console application that allows users to:
+ * &lt;ul&gt;
+ *   &lt;li&gt;Enter strings to process&lt;/li&gt;
+ *   &lt;li&gt;Choose between removal and replacement strategies&lt;/li&gt;
+ *   &lt;li&gt;View the processing results&lt;/li&gt;
+ * &lt;/ul&gt;1
+ *
+ * @since 1.0.0
+ */
+public final class Application {
+
+    /**
+     * Private constructor to prevent instantiation.
+     */
+<span class="nc" id="L26">    private Application() {</span>
+<span class="nc" id="L27">        throw new AssertionError(&quot;Main class should not be instantiated&quot;);</span>
+    }
+
+    /**
+     * Main method that starts the interactive console application.
+     *
+     * @param args command-line arguments (not used)
+     */
+    public static void main(String[] args) {
+<span class="nc" id="L36">        printWelcomeMessage();</span>
+
+<span class="nc" id="L38">        try (Scanner scanner = new Scanner(System.in)) {</span>
+<span class="nc" id="L39">            boolean continueProcessing = true;</span>
+
+<span class="nc bnc" id="L41" title="All 2 branches missed.">            while (continueProcessing) {</span>
+                // Get input string from user
+<span class="nc" id="L43">                String input = getInputString(scanner);</span>
+
+                // Choose processing strategy
+<span class="nc" id="L46">                StringProcessingStrategy strategy = chooseStrategy(scanner);</span>
+
+                // Process and display result
+<span class="nc" id="L49">                String result = StringProcessor.process(input, strategy);</span>
+<span class="nc" id="L50">                displayResult(input, result, strategy);</span>
+
+                // Ask to continue
+<span class="nc" id="L53">                continueProcessing = askToContinue(scanner);</span>
+<span class="nc" id="L54">            }</span>
+        }
+
+<span class="nc" id="L57">        System.out.println(&quot;\nThank you for using Consecutive Character Processor!&quot;);</span>
+<span class="nc" id="L58">    }</span>
+
+    /**
+     * Prints a welcome message and brief introduction.
+     */
+    private static void printWelcomeMessage() {
+<span class="nc" id="L64">        System.out.println(&quot;==============================================&quot;);</span>
+<span class="nc" id="L65">        System.out.println(&quot;      Consecutive Character Conversions Processor   &quot;);</span>
+<span class="nc" id="L66">        System.out.println(&quot;==============================================&quot;);</span>
+<span class="nc" id="L67">        System.out.println(&quot;This tool processes strings by handling sequences&quot;);</span>
+<span class="nc" id="L68">        System.out.println(&quot;of 3 or more consecutive identical characters.&quot;);</span>
+<span class="nc" id="L69">        System.out.println(&quot;Only lowercase letters (a-z) are supported.&quot;);</span>
+<span class="nc" id="L70">        System.out.println();</span>
+<span class="nc" id="L71">    }</span>
+
+    /**
+     * Prompts the user to enter a string for processing.
+     *
+     * @param scanner the scanner to read user input
+     * @return the input string
+     */
+    private static String getInputString(Scanner scanner) {
+<span class="nc" id="L80">        System.out.print(&quot;Enter the string to process: &quot;);</span>
+<span class="nc" id="L81">        return scanner.nextLine().trim();</span>
+    }
+
+    /**
+     * Allows the user to choose between available processing strategies.
+     *
+     * @param scanner the scanner to read user input
+     * @return the selected processing strategy
+     */
+    private static StringProcessingStrategy chooseStrategy(Scanner scanner) {
+<span class="nc" id="L91">        System.out.println(&quot;\nChoose processing strategy:&quot;);</span>
+<span class="nc" id="L92">        System.out.println(&quot;1 - Remove sequences of 3+ consecutive characters&quot;);</span>
+<span class="nc" id="L93">        System.out.println(&quot;2 - Replace sequences of 3+ consecutive characters with previous letter&quot;);</span>
+<span class="nc" id="L94">        System.out.print(&quot;Enter your choice (1 or 2): &quot;);</span>
+
+        while (true) {
+<span class="nc" id="L97">            String choice = scanner.nextLine().trim();</span>
+<span class="nc bnc" id="L98" title="All 3 branches missed.">            switch (choice) {</span>
+                case &quot;1&quot;:
+<span class="nc" id="L100">                    return StringProcessor.getRemoveStrategy();</span>
+                case &quot;2&quot;:
+<span class="nc" id="L102">                    return StringProcessor.getReplaceStrategy();</span>
+                default:
+<span class="nc" id="L104">                    System.out.print(&quot;Invalid choice. Please enter 1 or 2: &quot;);</span>
+            }
+<span class="nc" id="L106">        }</span>
+    }
+
+    /**
+     * Displays the processing result to the user.
+     *
+     * @param input    the original input string
+     * @param result   the processed result
+     * @param strategy the strategy used for processing
+     */
+    private static void displayResult(String input, String result, StringProcessingStrategy strategy) {
+<span class="nc" id="L117">        System.out.println(&quot;\nProcessing Results:&quot;);</span>
+<span class="nc" id="L118">        System.out.println(&quot;-------------------&quot;);</span>
+<span class="nc" id="L119">        System.out.println(&quot;Original string: &quot; + input);</span>
+<span class="nc" id="L120">        System.out.println(&quot;Strategy used:   &quot; + strategy.getName());</span>
+<span class="nc" id="L121">        System.out.println(&quot;Processed string: &quot; + result);</span>
+<span class="nc" id="L122">        System.out.println(&quot;-------------------&quot;);</span>
+<span class="nc" id="L123">    }</span>
+
+    /**
+     * Asks the user if they want to process another string.
+     *
+     * @param scanner the scanner to read user input
+     * @return true if the user wants to continue, false otherwise
+     */
+    private static boolean askToContinue(Scanner scanner) {
+<span class="nc" id="L132">        System.out.print(&quot;\nProcess another string? (y/n): &quot;);</span>
+<span class="nc" id="L133">        String response = scanner.nextLine().trim().toLowerCase();</span>
+<span class="nc" id="L134">        return response.startsWith(&quot;y&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConsecutiveCharReplacerStrategy.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Consecutive Character Conversion Processor</a> &gt; <a href="index.source.html" class="el_package">org.strtools.api</a> &gt; <span class="el_source">ConsecutiveCharReplacerStrategy.java</span></div><h1>ConsecutiveCharReplacerStrategy.java</h1><pre class="source lang-java linenums">package org.strtools.api;
+
+import org.strtools.util.ValidationUtils;
+
+/**
+ * A processing strategy that replaces sequences of 3 or more consecutive identical characters
+ * with a single character that comes immediately before it in the alphabet.
+ *
+ * &lt;p&gt;This implementation uses a stack-based approach to efficiently track character sequences
+ * and handle replacements. After replacement, it continues processing to handle any new sequences
+ * that may have been created by the replacement operation.
+ *
+ * &lt;p&gt;Example:
+ * &lt;pre&gt;
+ * Input:  &quot;abcccbad&quot;
+ * Output: &quot;d&quot;
+ * &lt;/pre&gt;
+ *
+ * &lt;p&gt;Note: The character 'a' has no preceding character in the alphabet, so sequences of 'a's
+ * will be removed rather than replaced.
+ *
+ * @since 1.0.0
+ */
+<span class="fc" id="L24">public final class ConsecutiveCharReplacerStrategy implements StringProcessingStrategy {</span>
+
+    /**
+     * Processes the input string by replacing all sequences of 3 or more consecutive
+     * identical characters with the preceding alphabet character, repeating until
+     * no more such sequences exist.
+     *
+     * @param input the string to process, may be null or empty
+     * @return the processed string with all qualifying sequences replaced
+     * @throws IllegalArgumentException if the input contains invalid characters
+     */
+    @Override
+    public String process(String input) {
+        // Validate input and handle null/empty cases
+<span class="fc" id="L38">        String normalizedInput = ValidationUtils.normalizeInput(input);</span>
+<span class="fc" id="L39">        ValidationUtils.validateOrThrow(normalizedInput);</span>
+
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (normalizedInput.isEmpty()) {</span>
+<span class="fc" id="L42">            return &quot;&quot;;</span>
+        }
+
+        // Process in a loop to handle cases where replacement creates new sequences
+<span class="fc" id="L46">        String current = normalizedInput;</span>
+        String previous;
+        do {
+<span class="fc" id="L49">            previous = current;</span>
+<span class="fc" id="L50">            current = processSinglePass(previous);</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        } while (!current.equals(previous));</span>
+
+<span class="fc" id="L53">        return current;</span>
+    }
+
+    /**
+     * Processes a single pass through the string, replacing all 3+ consecutive character sequences
+     * with their preceding character (or removing if no preceding character exists).
+     *
+     * @param input the string to process
+     * @return the string after one processing pass
+     */
+    private String processSinglePass(String input) {
+<span class="fc" id="L64">        StringBuilder result = new StringBuilder();</span>
+<span class="fc" id="L65">        int i = 0;</span>
+
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        while (i &lt; input.length()) {</span>
+            // Check if current position starts a sequence of 3+ identical characters
+<span class="fc" id="L69">            char currentChar = input.charAt(i);</span>
+<span class="fc" id="L70">            int j = i;</span>
+
+            // Find end of current sequence
+<span class="fc bfc" id="L73" title="All 4 branches covered.">            while (j &lt; input.length() &amp;&amp; input.charAt(j) == currentChar) {</span>
+<span class="fc" id="L74">                j++;</span>
+            }
+
+<span class="fc" id="L77">            int sequenceLength = j - i;</span>
+
+<span class="fc bfc" id="L79" title="All 2 branches covered.">            if (sequenceLength &gt;= 3) {</span>
+                // Get preceding character (if any exists in the result so far)
+<span class="fc bfc" id="L81" title="All 2 branches covered.">                char precedingChar = (result.length() &gt; 0) ? result.charAt(result.length() - 1) : 0;</span>
+
+                // Replace sequence with preceding character (or remove if none)
+<span class="fc bfc" id="L84" title="All 2 branches covered.">                if (precedingChar != 0) {</span>
+<span class="fc" id="L85">                    result.append(precedingChar);</span>
+                }
+
+                // Move to end of this sequence
+<span class="fc" id="L89">                i = j;</span>
+<span class="fc" id="L90">            } else {</span>
+                // No replacement needed - add characters to result
+<span class="fc" id="L92">                result.append(input, i, j);</span>
+<span class="fc" id="L93">                i = j;</span>
+            }
+<span class="fc" id="L95">        }</span>
+
+<span class="fc" id="L97">        return result.toString();</span>
+    }
+
+    /**
+     * Returns a descriptive name for this processing strategy.
+     *
+     * @return the strategy name
+     */
+    @Override
+    public String getName() {
+<span class="fc" id="L107">        return &quot;ConsecutiveCharReplacerStrategy&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>
