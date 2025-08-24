@@ -1,0 +1,2 @@
+# consecutive_char_processor
+Consecutive Character Conversion Processor
