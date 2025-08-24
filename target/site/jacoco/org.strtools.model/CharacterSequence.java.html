@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CharacterSequence.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Consecutive Character Conversion Processor</a> &gt; <a href="index.source.html" class="el_package">org.strtools.model</a> &gt; <span class="el_source">CharacterSequence.java</span></div><h1>CharacterSequence.java</h1><pre class="source lang-java linenums">package org.strtools.model;
+
+/**
+ * A record representing a sequence of identical characters with their count.
+ *
+ * &lt;p&gt;This immutable data carrier holds a character and the number of consecutive
+ * occurrences. It provides utility methods for common operations like incrementing
+ * the count and checking if the sequence meets the minimum length threshold for processing.
+ *
+ * @param character the character in the sequence
+ * @param count     the number of consecutive occurrences
+ * @since 1.0.0
+ */
+public record CharacterSequence(char character, int count) {
+
+    /**
+     * The minimum sequence length that triggers processing.
+     */
+    public static final int MIN_PROCESS_CHAR_LENGTH = 3;
+
+    /**
+     * Creates a new CharacterSequence with validation to ensure count is positive.
+     *
+     * @param character the character in the sequence
+     * @param count     the number of consecutive occurrences, must be at least 1
+     * @throws IllegalArgumentException if count is less than 1
+     */
+<span class="fc" id="L28">    public CharacterSequence {</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        if (count &lt; 1) {</span>
+<span class="nc" id="L30">            throw new IllegalArgumentException(&quot;Count must be positive: &quot; + count);</span>
+        }
+<span class="fc" id="L32">    }</span>
+
+    /**
+     * Returns a new CharSequence with the count incremented by 1.
+     *
+     * @return a new CharSequence instance with incremented count
+     */
+    public CharacterSequence increment() {
+<span class="fc" id="L40">        return new CharacterSequence(character, count + 1);</span>
+    }
+
+    /**
+     * Checks if this sequence meets or exceeds the minimum length required for processing.
+     *
+     * @return true if count &gt;= MIN_PROCESS_LENGTH, false otherwise
+     */
+    public boolean shouldProcess() {
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        return count &gt;= MIN_PROCESS_CHAR_LENGTH;</span>
+    }
+
+    /**
+     * Returns a new CharSequence with the same character and the specified count.
+     *
+     * @param newCount the new count value, must be at least 1
+     * @return a new CharSequence instance with the updated count
+     */
+    public CharacterSequence withCount(int newCount) {
+<span class="nc" id="L59">        return new CharacterSequence(character, newCount);</span>
+    }
+
+    /**
+     * Returns a string representation of this sequence in the format &quot;character:count&quot;.
+     *
+     * @return string representation
+     */
+    @Override
+    public String toString() {
+<span class="nc" id="L69">        return character + &quot;:&quot; + count;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConsecutiveCharRemoverStrategy.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Consecutive Character Conversion Processor</a> &gt; <a href="index.source.html" class="el_package">org.strtools.api</a> &gt; <span class="el_source">ConsecutiveCharRemoverStrategy.java</span></div><h1>ConsecutiveCharRemoverStrategy.java</h1><pre class="source lang-java linenums">package org.strtools.api;
+
+import org.strtools.model.CharacterSequence;
+import org.strtools.util.ValidationUtils;
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+/**
+ * A processing strategy that removes sequences of 3 or more consecutive identical characters.
+ *
+ * &lt;p&gt;This implementation processes the input string in a single pass using a stack-based
+ * approach for efficient handling of consecutive characters. After removing a qualifying
+ * sequence, it continues processing the resulting string to handle any new sequences
+ * that may have been created by the removal.
+ *
+ * &lt;p&gt;Example:
+ * &lt;pre&gt;
+ * Input:  &quot;aabcccbbad&quot;
+ * Output: &quot;d&quot;
+ * &lt;/pre&gt;
+ *
+ * @since 1.0.0
+ */
+<span class="fc" id="L24">public final class ConsecutiveCharRemoverStrategy implements StringProcessingStrategy {</span>
+
+    /**
+     * Processes the input string by removing all sequences of 3 or more consecutive
+     * identical characters, repeating until no more such sequences exist.
+     *
+     * @param input the string to process, may be null or empty
+     * @return the processed string with all qualifying sequences removed
+     * @throws IllegalArgumentException if the input contains invalid characters
+     */
+    @Override
+    public String process(String input) {
+        // Validate input and handle null/empty cases
+<span class="fc" id="L37">        String normalizedInput = ValidationUtils.normalizeInput(input);</span>
+<span class="fc" id="L38">        ValidationUtils.validateOrThrow(normalizedInput);</span>
+
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (normalizedInput.isEmpty()) {</span>
+<span class="fc" id="L41">            return &quot;&quot;;</span>
+        }
+
+        // Use Deque as a stack for efficient character sequence tracking
+<span class="fc" id="L45">        Deque&lt;CharacterSequence&gt; stack = new ArrayDeque&lt;&gt;();</span>
+
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        for (char c : normalizedInput.toCharArray()) {</span>
+<span class="fc" id="L48">            processCharacter(c, stack);</span>
+        }
+
+        // Process any remaining sequences that need removal
+<span class="fc" id="L52">        processRemainingStack(stack);</span>
+
+        // Build the final result from the stack
+<span class="fc" id="L55">        return buildResult(stack);</span>
+    }
+
+    /**
+     * Processes a single character, updating the stack with the current character sequences.
+     *
+     * @param c     the current character being processed
+     * @param stack the stack tracking character sequences
+     */
+    private void processCharacter(char c, Deque&lt;CharacterSequence&gt; stack) {
+<span class="fc bfc" id="L65" title="All 4 branches covered.">        if (!stack.isEmpty() &amp;&amp; stack.peek().character() == c) {</span>
+            // Increment count for existing sequence
+<span class="fc" id="L67">            CharacterSequence current = stack.pop();</span>
+<span class="fc" id="L68">            stack.push(current.increment());</span>
+<span class="fc" id="L69">        } else {</span>
+            // Start new sequence for different character
+<span class="fc" id="L71">            stack.push(new CharacterSequence(c, 1));</span>
+        }
+
+        // Check if top of stack needs processing after adding current character
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (stack.peek().shouldProcess()) {</span>
+<span class="fc" id="L76">            stack.pop(); // Remove the qualifying sequence</span>
+        }
+<span class="fc" id="L78">    }</span>
+
+    /**
+     * Processes the remaining stack to handle any sequences that need removal
+     * after initial character processing.
+     *
+     * @param stack the stack tracking character sequences
+     */
+    private void processRemainingStack(Deque&lt;CharacterSequence&gt; stack) {
+        // No additional processing needed for removal strategy
+        // as we already remove sequences as they qualify
+<span class="fc" id="L89">    }</span>
+
+    /**
+     * Builds the final result string from the stack of character sequences.
+     *
+     * @param stack the stack containing remaining character sequences
+     * @return the resulting string after all processing is complete
+     */
+    private String buildResult(Deque&lt;CharacterSequence&gt; stack) {
+        // Use StringBuilder for efficient string construction
+<span class="fc" id="L99">        StringBuilder result = new StringBuilder();</span>
+
+        // Process stack in reverse order to maintain original sequence
+<span class="fc" id="L102">        stack.descendingIterator()</span>
+<span class="fc" id="L103">                .forEachRemaining(seq -&gt; result.append(String.valueOf(seq.character()).repeat(seq.count())));</span>
+
+<span class="fc" id="L105">        return result.toString();</span>
+    }
+
+    /**
+     * Returns a descriptive name for this processing strategy.
+     *
+     * @return the strategy name
+     */
+    @Override
+    public String getName() {
+<span class="fc" id="L115">        return &quot;ConsecutiveCharRemoverStrategy&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

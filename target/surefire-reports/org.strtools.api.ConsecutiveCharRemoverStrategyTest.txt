@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.strtools.api.ConsecutiveCharRemoverStrategyTest
+-------------------------------------------------------------------------------
+Tests run: 28, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.165 s -- in org.strtools.api.ConsecutiveCharRemoverStrategyTest
